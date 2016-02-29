@@ -1,11 +1,18 @@
 <h1>Invoices</h1>
 
 {{log model}}
-{{#each model as |invoice|}}
-    {{log invoice}}
-    {{invoice.id}} ({{invoice.invoiceNumber}})<br />
-{{else}}
-    No Invoice
-{{/each}}
+
+<div class="row">
+    <div class="col-sm-5">
+        <ul class="list-group">
+            {{#each model as |invoice|}}
+                {{log invoice}}
+                <li class="list-group-item">{{invoice.invoiceNumber}}</li>
+            {{else}}
+                No Invoice
+            {{/each}}
+        </ul>
+    </div>
+</div>
 
 {{outlet}}
