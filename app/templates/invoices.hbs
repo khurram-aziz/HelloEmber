@@ -1,2 +1,11 @@
 <h1>Invoices</h1>
+
+{{log model}}
+{{#each model as |invoice|}}
+    {{log invoice}}
+    {{invoice.id}} ({{invoice.invoiceNumber}})<br />
+{{else}}
+    No Invoice
+{{/each}}
+
 {{outlet}}
