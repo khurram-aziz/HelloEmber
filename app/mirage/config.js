@@ -1,25 +1,16 @@
 export default function() {
-    this.get('/invoices', function() {
-        return {
-            data: [
-                { id: 1, type: 'invoice', attributes: {
-                    customer: 'CUST',
-                    invoiceNumber: 'INV01',
-                    createDate: new Date(),
-                    posted: true,
-                    amount: 100 }
-                },
-                { id: 2, type: 'invoice', attributes: {
-                    customer: 'CUST',
-                    invoiceNumber: 'INV02',
-                    createDate: new Date(),
-                    posted: true,
-                    amount: 110 }
-                }
-            ]
-        };
-    });
+    this.namespace = '/api/v1';
+    this.timing = 1000;
 
+    this.get('invoices', function(db, request) {
+        let data = {};
+        data = db.invoices.map( (attrs) => {
+            let invoices = { type: 'invoice', id: attrs.id, 
+                attributes: attrs };
+            return invoices;
+        });
+       return { data };
+    });
   // These comments are here to help you get started. Feel free to delete them.
 
   /*
