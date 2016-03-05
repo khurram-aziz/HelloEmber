@@ -11,6 +11,40 @@ export default function() {
         });
        return { data };
     });
+    
+    this.get('invoices/:id', function(db, request) {
+        let id = request.params.id;
+        let invoice = db.invoices.find(id);
+        let items = db.items.where({ invoice_id: invoice.id });
+        let data = {
+            type: 'invoice', id: id,
+            attributes: invoice,
+            relationships: {
+                items: {
+                    data: []
+                }
+            }
+        };
+        let included = {};
+        included = items.map( (attrs) => {
+            data.relationships.items.data.push( { type: "item", id: attrs.id, attributes: attrs });
+            let items = { type: 'item', id: attrs.id, attributes: attrs };
+            return items;
+        });
+        return { data, included };
+    });
+    this.get('items/:id', function(db, request) {
+        let id = request.params.id;
+        let item = db.items.find(id);
+        let data = { type: 'item', id: id, attributes: item };
+        return { data };
+    });
+    this.patch('items/:id', function(db, request) {
+        let id = request.params.id;
+        var item = JSON.parse(request.requestBody);
+        var newItem = db.items.update({ id: id, price: item.price });
+        return { data: { type: 'item', id: id, attributes: newItem } };
+    });
   // These comments are here to help you get started. Feel free to delete them.
 
   /*

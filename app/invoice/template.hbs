@@ -1,0 +1,26 @@
+<h2>Invoice {{model.invoiceNumber}}</h2>
+{{log model}}
+
+
+<div class="row">
+    <div class="col-sm-5">
+        Date: {{model.createDate}}<br>
+        Posted: {{model.posted}}<br>
+        Amount: {{model.amount}}
+        <ul class="list-group">
+            {{#each model.items as |item|}}
+                {{log item}}
+                <li class="list-group-item">
+                    {{item.description}}<br>
+                    {{item.price}} * {{item.quantity}} = {{item.amount}}
+                    {{link-to 'Edit' 'invoice.edit-item' item.id}}
+                </li>
+            {{else}}
+                No item
+            {{/each}}
+        </ul>
+    </div>
+    <div class="col-sm-7">
+        {{outlet}}
+    </div>
+</div>

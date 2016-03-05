@@ -7,6 +7,10 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('invoices');
+  this.route('invoice', { path: '/invoice/:id' }, function() {
+      this.route('edit-item', { path: 'edit/:id'});
+  });
+  this.route('invoice.edit-item');
 });
 
 export default Router;

@@ -1,4 +1,4 @@
-<h1>Invoices</h1>
+<h2>My Invoices</h2>
 
 {{log model}}
 
@@ -7,12 +7,16 @@
         <ul class="list-group">
             {{#each model as |invoice|}}
                 {{log invoice}}
-                <li class="list-group-item">{{invoice.invoiceNumber}}</li>
+                <li class="list-group-item">
+                    {{invoice.invoiceNumber}}
+                    {{link-to 'Details' 'invoice' invoice.id}}
+                </li>
             {{else}}
                 No Invoice
             {{/each}}
         </ul>
     </div>
+    <div class="col-sm-7">
+        {{outlet}}
+    </div>
 </div>
-
-{{outlet}}
