@@ -10,7 +10,6 @@ Router.map(function() {
   this.route('invoice', { path: '/invoice/:id' }, function() {
       this.route('edit-item', { path: 'edit/:id'});
   });
-  this.route('invoice.edit-item');
 });
 
 export default Router;
